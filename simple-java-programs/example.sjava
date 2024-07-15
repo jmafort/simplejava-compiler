@@ -1,0 +1,85 @@
+interface Collection {
+    public local base void add(Pessoa p);
+    public local base Pessoa get(char[] nome);
+}
+
+concrete class Funcao {
+    public local final int TAM = 3;
+    protected local base float aluno;
+    private static base char A = 'a', B, C, D;
+
+    public static final void principal(){
+        Funcao f = new Funcao();
+        A = TAM;
+        B = f.fatorial(A);
+        C = f.exp(A,B);
+        D = f.maior(f.E);
+    }
+
+    protected local final int fatorial(int a){
+        int i, result=0;
+        i = 1;
+        while (i < a){
+            result = result*i;
+            i=i+1;
+        }
+        return result;
+    }
+
+    private local base float exp(float a, float b){
+        int i, result=a;
+        i = 1;
+        if (b = 0) result = 1
+        else
+            do{
+                result = a * a;
+                ++i;
+            } while (i < b);
+        return result;
+    }
+
+    private local base int maior(Aluno[] a){
+        Aluno result = a[0];
+        for (int i = 0; i < 15; ++i){
+            if (a[i].media > result.media)
+                result = a[i];
+        }
+        return result;
+    }
+}
+
+abstract class Pessoa{
+    private local base char[] nome;
+    
+    public local base void setNome(char[] nome){
+        this.nome = nome;
+    }
+    
+    public local base char[] getNome(){
+        return nome;
+    }
+}
+
+concrete class Aluno extends Pessoa {
+    private local base double nota1, nota2
+    public local base double media;
+}
+
+concrete class Turma implements Collection{
+    private local final Aluno[] alunos = new Aluno[15];
+    private local base int num = 0;
+    
+    public local base void add(Pessoa p){
+        alunos[num] = p;
+        ++num;
+    }
+    
+    public local base Pessoa get(char[] nome){
+        Aluno result;
+        for (Aluno a: alunos){
+            if (a[i].getNome() = nome)
+                result = a[i];
+            }
+        return result;
+    }
+}

@@ -1,85 +1,96 @@
-interface Collection {
-    public local base void add(Pessoa p);
-    public local base Pessoa get(char[] nome);
+Interface Collection {
+    public local base abstract void add(Pessoa p){};
+    public local base abstract Pessoa get(char nome){};
 }
 
 concrete class Funcao {
-    public local final int TAM = 3;
-    protected local base float aluno;
-    private static base char A = 'a', B, C, D;
+    public local final int TAM = 10;;
+    protected local base float aluno;;
+    private static base char A = 'a', B, C, D;;
+    private local base int i, iResult;;
+    private local base float fResult;;
 
-    public static final void principal(){
-        Funcao f = new Funcao();
+    public static final concrete void principal(Funcao f){
         A = TAM;
         B = f.fatorial(A);
         C = f.exp(A,B);
         D = f.maior(f.E);
-    }
+    };
 
-    protected local final int fatorial(int a){
-        int i, result=0;
+    protected local final concrete int fatorial(int a){
+        iResult = 0;
         i = 1;
         while (i < a){
-            result = result*i;
+            iResult = iResult*i;
             i=i+1;
         }
-        return result;
-    }
+        return iResult;
+    };
 
-    private local base float exp(float a, float b){
-        int i, result=a;
+    private local base concrete float exp(float a, float b){
+        fResult=a;
         i = 1;
-        if (b = 0) result = 1
+        if (b == 0) fResult = 1.0;;
         else
             do{
-                result = a * a;
-                ++i;
-            } while (i < b);
-        return result;
-    }
+                fResult = a * a;
+                i = ++i;
+            } while (i < b);;
+        return fResult;
+    };
 
-    private local base int maior(Aluno[] a){
-        Aluno result = a[0];
-        for (int i = 0; i < 15; ++i){
-            if (a[i].media > result.media)
-                result = a[i];
+    private local base concrete int maior(Aluno a){
+        iResult = 0;
+        for (int a = 0;; i < 15; i = ++i){
+            if (a[i].media() > a[iResult].media()) iResult = i;;
         }
-        return result;
-    }
+        return iResult;
+    };
 }
 
 abstract class Pessoa{
-    private local base char[] nome;
-    
-    public local base void setNome(char[] nome){
+    private local base char nome;;
+    public local base concrete void Nome(char nome){
         this.nome = nome;
-    }
-    
-    public local base char[] getNome(){
+    };
+    public local base concrete char getNome(){
         return nome;
-    }
+    };
 }
 
 concrete class Aluno extends Pessoa {
-    private local base double nota1, nota2
-    public local base double media;
+    private local base double nota1, nota2;;
+    public local base concrete void nota1(double n) {
+        nota1 = n;
+    };
+    public local base concrete void nota2(double n) {
+        nota2 = n;
+    };
+    public local base concrete double getNota1() {
+        return nota1;
+    };
+    public local base concrete double getNota2() {
+        return nota2;
+    };
+    public local base concrete double media() {
+        return nota1*nota2/2;
+    };
 }
 
 concrete class Turma implements Collection{
-    private local final Aluno[] alunos = new Aluno[15];
-    private local base int num = 0;
-    
-    public local base void add(Pessoa p){
+    private local final Aluno alunos = new Aluno[15];;
+    private local base int num = 0;;
+    private local base Aluno result;;
+    public local base concrete void add(Pessoa p){
         alunos[num] = p;
-        ++num;
-    }
-    
-    public local base Pessoa get(char[] nome){
-        Aluno result;
+        num = ++num;
+    };
+
+    public local base concrete Pessoa get(char nome){
         for (Aluno a: alunos){
-            if (a[i].getNome() = nome)
-                result = a[i];
-            }
+            if (a.getNome() == nome)
+                result = a;;
+        }
         return result;
-    }
+    };
 }

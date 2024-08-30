@@ -1,0 +1,141 @@
+program : declaration declarations
+
+declarations : declaration declarations
+             | empty
+
+declaration : struct ID inheritance LCURLYBRACE item_decls RCURLYBRACE
+
+struct : instance CLASS
+       | INTERFACE
+
+instance : ABSTRACT
+         | CONCRETE
+
+inheritance : EXTENDS ID
+            | IMPLEMENTS ID
+            | empty
+
+item_decls : visibility scope final item_decl SEMICOLON item_decls
+           | empty
+
+visibility : PUBLIC
+           | PROTECTED
+           | PRIVATE
+
+scope : STATIC
+      | LOCAL
+
+final : FINAL
+      | BASE
+
+item_decl : atrib_decl
+          | method_decl
+
+atrib_decl : type var var_list SEMICOLON
+
+method_decl : instance type method
+            
+type : INT
+     | FLOAT
+     | DOUBLE
+     | CHAR
+     | VOID
+     | ID name
+
+var : ID array value
+
+value : ASSIGNMENT exp
+      | empty
+
+var_list : COMMA var var_list
+         | empty
+
+array : LSBRACKET RSBRACKET array
+      | empty
+
+method : ID LPAREN argument RPAREN bloc_com
+
+argument : type var arg_list
+
+arg_list : COMMA argument
+         | empty
+
+bloc_com : LCURLYBRACE com_list RCURLYBRACE
+
+bloc : bloc_com
+     | command SEMICOLON
+
+com_list : command com_list
+         | empty
+
+command : atrib SEMICOLON
+        | WHILE LPAREN exp_logic RPAREN bloc
+        | DO bloc WHILE LPAREN exp_logic RPAREN SEMICOLON
+        | IF LPAREN exp_logic RPAREN bloc else
+        | FOR LPAREN for_exp RPAREN bloc
+        | SWITCH LPAREN ID name RPAREN LCURLYBRACE switch_case RCURLYBRACE
+        | BREAK SEMICOLON
+        | CONTINUE SEMICOLON
+        | RETURN exp SEMICOLON
+
+atrib : ID name ASSIGNMENT exp
+
+else : ELSE bloc
+     | empty
+
+for_exp : atrib_decl SEMICOLON exp_logic SEMICOLON atrib
+        | type ID COLON ID name
+
+switch_case : CASE const COLON bloc switch_case
+            | DEFAULT bloc
+
+exp : exp_math
+    | exp_logic
+    | operator ID name
+    | NEW type name
+
+operator : DOUBLEPLUS
+         | DOUBLEMINUS
+
+params : param param_list
+       | empty
+
+param_list : COMMA param param_list
+           | empty
+
+exp_logic : exp op_logic exp_logic
+          | exp
+
+exp_math : param op_math exp_math
+         | param
+
+op_logic : MORETHAN
+         | LESSTHAN
+         | MOREOREQUALTHAN
+         | LESSOREQUALTHAN
+         | DOUBLEEQUALS
+         | NOTEQUAL
+
+op_math : PLUS
+        | MINUS
+        | TIMES
+        | DIVIDE
+
+param : ID name
+      | THIS field
+      | const
+
+array_size : LSBRACKET exp_math RSBRACKET array_size
+           | empty
+
+name : field
+     | array_size name
+     | LPAREN params RPAREN name
+     | empty
+
+field : DOT ID name
+      | empty
+
+const : NUMBER
+      | STRING
+      | CHARACTER

@@ -55,7 +55,8 @@ class LexicalAnalyzer:
         "BASE",
         "INT",
         "FLOAT",
-        "DOUBLECHAR",
+        "DOUBLE",
+        "CHAR",
         "VOID",
         "WHILE",
         "DO",
@@ -137,6 +138,8 @@ class LexicalAnalyzer:
         if token.value.upper() in self.reserved_words:
             token.type = token.value.upper()
             self.unique_token_types[token.type] += 1
+        else:
+            token.type = "ID"
         
         return token
 

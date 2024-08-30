@@ -51,7 +51,7 @@ concrete class Funcao {
 abstract class Pessoa{
     private local base char nome;;
     public local base concrete void Nome(char nome){
-        this.nome = nome;
+        nome = nome;
     };
     public local base concrete char getNome(){
         return nome;

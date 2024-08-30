@@ -377,9 +377,9 @@ class SyntacticAnalyzer:
     def p_name(self, p):
         """
         name : field
-            | array_size name_non_empty
-            | LPAREN params RPAREN name_non_empty
-            | empty
+             | array_size name_non_empty
+             | LPAREN params RPAREN name_non_empty
+             | empty
         """
         if len(p) == 2 and p[1] is not None:
             p[0] = Node("name", [p[1]])
@@ -391,8 +391,8 @@ class SyntacticAnalyzer:
     def p_name_non_empty(self, p):
         """
         name_non_empty : field
-                    | array_size name_non_empty
-                    | LPAREN params RPAREN name_non_empty
+                       | array_size name_non_empty
+                       | LPAREN params RPAREN name_non_empty
         """
         if len(p) == 2:
             p[0] = Node("name_non_empty", [p[1]])
@@ -404,7 +404,7 @@ class SyntacticAnalyzer:
     def p_field(self, p):
         """
         field : DOT ID name_non_empty
-            | empty
+              | empty
         """
         if len(p) == 4:
             p[0] = Node("field", [Node("ID", value=p[2]), p[3]])
